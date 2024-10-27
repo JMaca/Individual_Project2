@@ -1,9 +1,9 @@
 package com.example.individual_project2
 
 import android.content.Intent
+import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -15,10 +15,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -29,23 +28,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.content.pm.ShortcutInfoCompat.Surface
-
 
 
 @Composable
-fun LoginScreen() {
+fun SignUpScreen() {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var dateOfBirth by remember { mutableStateOf("") }
+    var familyName by remember { mutableStateOf("") }
+
     val context = LocalContext.current
 
     Column(
@@ -58,12 +54,12 @@ fun LoginScreen() {
         Box(
             modifier = Modifier.fillMaxWidth()
                 .fillMaxHeight(0.30f)
-                .background(Color.Red),
+                .background(Color.Cyan),
 
 
             ) {
             Text(
-                text = "Welcome!\r\nPlease Login Here",
+                text = "Welcome!\r\nPlease SignUp Here",
                 modifier = Modifier.padding(50.dp),
                 style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center
@@ -75,14 +71,9 @@ fun LoginScreen() {
                 .fillMaxSize()
                 .background(Color.White)
                 .padding(28.dp),
+
             horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Image(
-                painterResource(R.drawable.baseline_account_box_24),
-                contentDescription = "Account Icon",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-            )
+            ) {
             TextField(
                 value = email,
                 onValueChange = { email = it },
@@ -113,7 +104,7 @@ fun LoginScreen() {
             Button(
                 modifier = Modifier,
                 onClick = {
-                    if (validateLogin(email, password)) {
+                    if (validateSignUp(email, password)) {
                         Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
                         loginSuccess()
                     } else {
@@ -129,17 +120,16 @@ fun LoginScreen() {
         }
     }
 }
-
-fun loginSuccess() {
+fun signUpSuccess() {
     val intent = Intent()
 }
 
-fun validateLogin(email: String, password: String): Boolean {
-return false
+fun validateSignUp(email: String, password: String): Boolean {
+    return false
 }
 
 @Preview
 @Composable
-fun LoginScreenPreview(){
-    LoginScreen()
+fun SignUpScreenPreview(){
+    SignUpScreen()
 }
