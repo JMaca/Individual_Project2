@@ -3,7 +3,9 @@ package com.example.individual_project2
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -21,7 +23,9 @@ fun QuizScreen(modifier: Modifier = Modifier) {
     var numPeopleInput by remember { mutableStateOf("") }
 
     Column(
-        modifier = modifier.padding(10.dp)
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(10.dp)
     ) {
         Text(
             text = "Pizza Party",

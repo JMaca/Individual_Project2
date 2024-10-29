@@ -1,5 +1,6 @@
 package com.example.individual_project2
 
+import android.content.Intent
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -36,7 +37,7 @@ fun SplashScreen(navController: NavHostController) {
             }
             ))
         delay(3000)
-        navController.navigate(BottomNavigationItems.PizzaScreen.route)
+        navController.navigate(BottomNavigationItems.LogScreen.route)
     }
 
     Column (modifier = Modifier.fillMaxSize()

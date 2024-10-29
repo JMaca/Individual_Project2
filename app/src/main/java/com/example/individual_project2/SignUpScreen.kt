@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -33,19 +35,24 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun SignUpScreen() {
+fun SignUpScreen(navController: NavHostController, modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var confirmPassword by remember { mutableStateOf("") }
     var dateOfBirth by remember { mutableStateOf("") }
     var familyName by remember { mutableStateOf("") }
-
     val context = LocalContext.current
+
 
     Column(
         modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,12 +108,48 @@ fun SignUpScreen() {
                     Text("Password")
                 },
             )
+            TextField(
+                value = confirmPassword,
+                onValueChange = { confirmPassword = it },
+                Modifier.padding(16.dp)
+                    .border(BorderStroke(width = 2.dp, color = Color.Black)),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent
+                ),
+                label = {
+                    Text("Confirm Password")
+                },
+            )
+            TextField(
+                value = dateOfBirth,
+                onValueChange = { dateOfBirth = it },
+                Modifier.padding(16.dp).border(BorderStroke(width = 2.dp, color = Color.Black)),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent
+                ),
+                label = { Text("Date of Birth") },
+            )
+            TextField(
+                value = familyName,
+                onValueChange = { familyName = it },
+                Modifier.padding(16.dp).border(BorderStroke(width = 2.dp, color = Color.Black)),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent
+                ),
+                label = { Text("Family Name") },
+            )
             Button(
                 modifier = Modifier,
                 onClick = {
                     if (validateSignUp(email, password)) {
-                        Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
-                        loginSuccess()
+                        Toast.makeText(context, "Sign Up Success", Toast.LENGTH_SHORT).show()
+                        signUpSuccess()
                     } else {
                         Toast.makeText(context, "Email or Password Error", Toast.LENGTH_SHORT)
                             .show()
@@ -114,14 +157,23 @@ fun SignUpScreen() {
                 }
             ) {
                 Text(
-                    text = "Login"
+                    text = "Sign Up"
+                )
+            }
+            Button(
+                modifier = Modifier.padding(20.dp),
+                onClick = {
+                    navController.navigate(BottomNavigationItems.LogScreen.route)
+                }
+            ) {
+                Text(
+                    text = "Return to Login"
                 )
             }
         }
     }
 }
 fun signUpSuccess() {
-    val intent = Intent()
 }
 
 fun validateSignUp(email: String, password: String): Boolean {
@@ -131,5 +183,5 @@ fun validateSignUp(email: String, password: String): Boolean {
 @Preview
 @Composable
 fun SignUpScreenPreview(){
-    SignUpScreen()
+    SignUpScreen(rememberNavController())
 }

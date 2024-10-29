@@ -1,11 +1,13 @@
 package com.example.individual_project2
 
 import android.content.Intent
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,7 +15,9 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -39,31 +43,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.pm.ShortcutInfoCompat.Surface
-
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController, modifier: Modifier = Modifier) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var loggedIn by remember { mutableStateOf(true) }
     val context = LocalContext.current
 
     Column(
+
         modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
 
         ) {
         Box(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .fillMaxHeight(0.30f)
                 .background(Color.Red),
 
 
             ) {
             Text(
-                text = "Welcome!\r\nPlease Login Here",
+                text = "Welcome to Quizarama!\r\n\nPlease Login Here",
                 modifier = Modifier.padding(50.dp),
                 style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center
@@ -86,7 +96,9 @@ fun LoginScreen() {
             TextField(
                 value = email,
                 onValueChange = { email = it },
-                Modifier.padding(16.dp).border(BorderStroke(width = 2.dp, color = Color.Black)),
+                Modifier
+                    .padding(16.dp)
+                    .border(BorderStroke(width = 2.dp, color = Color.Black)),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedContainerColor = Color.Transparent,
@@ -99,7 +111,8 @@ fun LoginScreen() {
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                Modifier.padding(16.dp)
+                Modifier
+                    .padding(16.dp)
                     .border(BorderStroke(width = 2.dp, color = Color.Black)),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 colors = OutlinedTextFieldDefaults.colors(
@@ -111,11 +124,14 @@ fun LoginScreen() {
                 },
             )
             Button(
-                modifier = Modifier,
+                modifier = Modifier
+                    .padding(30.dp),
                 onClick = {
                     if (validateLogin(email, password)) {
                         Toast.makeText(context, "Login Success", Toast.LENGTH_SHORT).show()
                         loginSuccess()
+                        navController.navigate(BottomNavigationItems.QuizScreen.route)
+
                     } else {
                         Toast.makeText(context, "Email or Password Error", Toast.LENGTH_SHORT)
                             .show()
@@ -126,20 +142,33 @@ fun LoginScreen() {
                     text = "Login"
                 )
             }
+            Box(
+                modifier = Modifier
+                    .padding(30.dp)
+            )
+            {
+                Text(
+                    text = "Not signed Up? Click here to join!",
+                    modifier = Modifier.clickable {
+                        navController.navigate(BottomNavigationItems.SignupScreen.route)
+                    },
+
+                )
+            }
         }
     }
 }
 
 fun loginSuccess() {
-    val intent = Intent()
+    val loggedIn = true
 }
 
 fun validateLogin(email: String, password: String): Boolean {
-return false
+return true
 }
 
-@Preview
-@Composable
-fun LoginScreenPreview(){
-    LoginScreen()
-}
+//@Preview
+//@Composable
+//fun LoginScreenPreview(){
+//    LoginScreen(rememberNavController())
+//}

@@ -43,9 +43,8 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier.padding(paddingValues)
                     ) {
-                        NavigationGraph(navController = navController) {
-                                isVisible ->
-                            buttonsVisible = isVisible
+                        NavigationGraph(navController = navController) { isVisible ->
+                            buttonsVisible = loggedIn()
                         }
                     }
                 }
@@ -53,35 +52,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-}
-
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Individual_Project2Theme {
-        val navController: NavHostController = rememberNavController()
-        var buttonsVisible by remember { mutableStateOf(true) }
-
-        Scaffold(
-
-            bottomBar = {
-                if (buttonsVisible) {
-                    BottomBar(
-                        navController = navController,
-                        state = buttonsVisible,
-                        modifier = Modifier
-                    )
-                }
-            }) { paddingValues ->
-            Box(
-                modifier = Modifier.padding(paddingValues)
-            ) {
-                NavigationGraph(navController = navController) {
-                        isVisible ->
-                    buttonsVisible = isVisible
-                }
-            }
-        }
+    private fun loggedIn(): Boolean {
+        return false
     }
 }

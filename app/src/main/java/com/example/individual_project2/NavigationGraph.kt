@@ -29,14 +29,17 @@ fun NavigationGraph(
             onBottomBarVisibilityChanged(false)
             SplashScreen(navController = navController)
         }
-        composable(BottomNavigationItems.PizzaScreen.route) {
+        composable(BottomNavigationItems.LogScreen.route) {
             onBottomBarVisibilityChanged(true)
+            LoginScreen(navController = navController)
         }
-        composable(BottomNavigationItems.GpaAppScreen.route) {
+        composable(BottomNavigationItems.SignupScreen.route) {
             onBottomBarVisibilityChanged(true)
+            SignUpScreen(navController = navController)
         }
-        composable(BottomNavigationItems.Screen3.route) {
+        composable(BottomNavigationItems.QuizScreen.route) {
             onBottomBarVisibilityChanged(true)
+            QuizScreen()
         }
     }
 }
@@ -50,5 +53,4 @@ fun DrawerNav()
 {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 }
-
 

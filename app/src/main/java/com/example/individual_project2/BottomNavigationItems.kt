@@ -13,19 +13,19 @@ sealed class BottomNavigationItems(
 ) {
     object Welcome : BottomNavigationItems("welcomeScreen")
 
-    object PizzaScreen : BottomNavigationItems(
-        route = "homeScreen",
-        title = "Home",
+    object LogScreen : BottomNavigationItems(
+        route = "loginScreen",
+        title = "Log",
         icon = Icons.Outlined.Home
     )
-    object GpaAppScreen : BottomNavigationItems(
-        route = "",
-        title = "App",
+    object SignupScreen : BottomNavigationItems(
+        route = "signupScreen",
+        title = "sign",
         icon = Icons.Default.CheckCircle
     )
-    object Screen3 : BottomNavigationItems(
-        route = "screen3",
-        title = "Screen3",
+    object QuizScreen : BottomNavigationItems(
+        route = "quizScreen",
+        title = "quiz",
         icon = Icons.Outlined.AccountCircle
     )
 }

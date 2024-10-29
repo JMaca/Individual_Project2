@@ -20,9 +20,9 @@ fun BottomBar(
     modifier: Modifier = Modifier
 ) {
     val screens = listOf(
-        BottomNavigationItems.PizzaScreen,
-        BottomNavigationItems.GpaAppScreen,
-        BottomNavigationItems.Screen3
+        BottomNavigationItems.LogScreen,
+        BottomNavigationItems.SignupScreen,
+        BottomNavigationItems.QuizScreen
     )
 
     NavigationBar(
