@@ -179,9 +179,3 @@ fun signUpSuccess() {
 fun validateSignUp(email: String, password: String): Boolean {
     return false
 }
-
-@Preview
-@Composable
-fun SignUpScreenPreview(){
-    SignUpScreen(rememberNavController())
-}

@@ -39,7 +39,11 @@ fun NavigationGraph(
         }
         composable(BottomNavigationItems.QuizScreen.route) {
             onBottomBarVisibilityChanged(true)
-            QuizScreen()
+            QuizScreen(navController = navController)
+        }
+        composable(BottomNavigationItems.QuestionsScreen.route) {
+            onBottomBarVisibilityChanged(true)
+            QuestionsScreen(navController = navController)
         }
     }
 }

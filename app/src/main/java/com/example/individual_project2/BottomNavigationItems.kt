@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class BottomNavigationItems(
@@ -27,5 +28,10 @@ sealed class BottomNavigationItems(
         route = "quizScreen",
         title = "quiz",
         icon = Icons.Outlined.AccountCircle
+    )
+    object QuestionsScreen : BottomNavigationItems(
+        route = "questionScreen",
+        title = "questions",
+        icon = Icons.Outlined.Info
     )
 }

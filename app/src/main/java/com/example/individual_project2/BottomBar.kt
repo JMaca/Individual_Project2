@@ -22,7 +22,8 @@ fun BottomBar(
     val screens = listOf(
         BottomNavigationItems.LogScreen,
         BottomNavigationItems.SignupScreen,
-        BottomNavigationItems.QuizScreen
+        BottomNavigationItems.QuizScreen,
+        BottomNavigationItems.QuestionsScreen
     )
 
     NavigationBar(
